@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editText = (MaterialEditText) findViewById(R.id.editText);
+        int x = getSharedPreferences(PREF_NAME, MODE_WORLD_READABLE).getInt(PREF_KEY, -1);
+        if (x != -1) {
+            editText.setText(String.valueOf(x));
+        }
     }
 
     public void apply(View view) {
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             int res = Integer.valueOf(s);
             getSharedPreferences(PREF_NAME, MODE_WORLD_READABLE).edit().putInt(PREF_KEY, res)
                     .apply();
+            Toast.makeText(this, "设置成功", Toast.LENGTH_SHORT).show();
         }
     }
 
